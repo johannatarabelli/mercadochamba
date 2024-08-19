@@ -1,0 +1,47 @@
+<div
+  class="mx-2 sm:mx-4 md:mx-8 grid justify-content-center gap-4 mt-2 mb-4 sm:mb-6"
+>
+  @if(professionals.length > 0){
+  <div class="" *ngFor="let profesional of professionals">
+    @if(profesional.imageUrl){
+    <div
+      class="card col-1 md:col-4 sm:col-6"
+      [routerLink]="['/profile', profesional.userId]"
+    >
+      <div class="flex justify-content-center">
+        <img
+          src="{{ profesional.imageUrl }}"
+          alt="{{ profesional.specialty }}"
+        />
+      </div>
+
+      <span class="text-xl font-medium">{{ profesional.userName }}</span>
+      <div class="flex align-content-center">
+        <mat-icon color="accent">construction</mat-icon>
+        <span class="ml-2 text-lg">{{ profesional.categoriesString }}</span>
+      </div>
+      <div class="flex align-content-center">
+        <mat-icon color="accent">reviews</mat-icon>
+        <span class="ml-2 text-lg">
+          Reseñas ({{ 1 | randomNumber : 30 }})
+        </span>
+      </div>
+
+      <div class="flex align-content-center">
+        <mat-icon color="accent">thumb_up</mat-icon>
+        <span class="ml-2 text-lg">
+          <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]" color="accent">
+            {{ i <= 4 ? "star" : "star_half" }}
+          </mat-icon>
+        </span>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+  <div class="flex align-content-center">
+    <mat-icon color="warn">warning</mat-icon>
+    <span class="ml-2 text-lg"> No se encontraron perfiles </span>
+  </div>
+  }
+</div>

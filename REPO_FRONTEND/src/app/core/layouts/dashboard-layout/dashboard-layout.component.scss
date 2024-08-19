@@ -1,0 +1,5 @@
+.toolbar-container {
+    overflow-x: auto; /* Permite el desbordamiento horizontal si es necesario */
+    overflow-y: hidden; /* Evita el desbordamiento vertical */
+    transition: width 0.3s ease; /* Transición suave para el cambio de ancho */
+  }

@@ -1,0 +1,51 @@
+<form
+  [formGroup]="formCountry"
+  (ngSubmit)="submit()"
+  class="p-4 max-w-md mx-auto"
+  autocomplete="off"
+>
+  <mat-form-field appearance="fill" class="w-full">
+    <mat-label>Nombre</mat-label>
+    <input type="text" formControlName="name" matInput />
+    <mat-error *ngIf="formCountry.get('name')?.hasError('required')">
+      El nombre es requerido.
+    </mat-error>
+    <mat-error *ngIf="formCountry.get('name')?.hasError('minlength')">
+      El nombre debe tener al menos 2 caracteres.
+    </mat-error>
+    <mat-error *ngIf="formCountry.get('name')?.hasError('maxlength')">
+      El nombre no puede exceder 50 caracteres.
+    </mat-error>
+  </mat-form-field>
+
+  <button
+    mat-flat-button
+    color="primary"
+    type="submit"
+    [disabled]="formCountry.invalid"
+    class="mt-4"
+  >
+    Crear
+  </button>
+</form>
+
+<div class="p-4">
+    <h3 class="font-semibold text-2xl mb-4">Lista de Países</h3>
+    <table mat-table [dataSource]="countries" class="mat-elevation-z8 w-full">
+  
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let country">{{ country.name }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let country">
+          <button mat-button color="warn" (click)="deleteCountry(country.id)">Eliminar</button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </table>
+  </div>

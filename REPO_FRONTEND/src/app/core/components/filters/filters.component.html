@@ -1,0 +1,65 @@
+<div class="mx-2 sm:mx-4 md:mx-8">
+  <div class="grid justify-content-center gap-4 py-2 sm:py-4 md:py-4">
+    <button
+      mat-raised-button
+      *ngFor="let category of categories.slice(0, 8)"
+      class="h-3rem lg:h-6rem col-5 lg:col border-round-xl p-1"
+      [color]="idSelectedCategory === category.id ? 'accent' : 'primary'"
+      (click)="emitSelectCategory(category.id)"
+    >
+      <div class="flex flex-column justify-content-center align-items-center">
+        <mat-icon>{{ category.icon }}</mat-icon>
+        <span class="text-xs">{{ category.name }}</span>
+      </div>
+    </button>
+  </div>
+
+  <form
+    [formGroup]="formSearch"
+    (ngSubmit)="emitSearch()"
+    class="grid justify-content-center align-content-center py-2 sm:py-4 md:py-4 gap-2"
+  >
+    <mat-form-field class="col-12 sm:col-9 grid nested-grid" color="accent">
+      <input
+        type="text"
+        matInput
+        placeholder="Carpintería,Electricidad..."
+        formControlName="search"
+        (keydown.enter)="disabled($event)"
+        (keyup)="onKeyUpReset()"
+      />
+
+      <button matSuffix mat-icon-button (click)="resetText()">
+        <mat-icon color="accent">clear</mat-icon>
+      </button>
+      <mat-icon matSuffix color="accent">search</mat-icon>
+
+      <mat-error *ngIf="formSearch.get('search')?.hasError('required')">
+        El texto en la búsqueda es obligatorio
+      </mat-error>
+      <mat-error *ngIf="formSearch.get('search')?.hasError('minlength')">
+        El texto debe tener al menos 3 caracteres
+      </mat-error>
+      <mat-error *ngIf="formSearch.get('search')?.hasError('maxlength')">
+        El texto debe tener máximo 50 caracteres
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      class="h-4rem sm:h-3rem col-3 border-round-2xl"
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="formSearch.invalid"
+    >
+      <i class="fa-solid fa-filter"></i>Aplicar Filtros
+    </button>
+  </form>
+
+  <!-- <mat-form-field>
+    <mat-label>Filter by</mat-label>
+    <mat-select >
+      <mat-option class="relative" *ngFor="let category of categories" [value]="category.id">{{ category.name }}</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+</div>

@@ -1,0 +1,89 @@
+@if(profile?.imageUrl){
+
+<mat-toolbar
+  class="flex flex-column h-fit sm:h-fit p-4 justify-content-center align-items-center flex-nowrap row-gap-2 sm:row-gap-3 border-round-2xl"
+  color="primary"
+>
+  <img
+    [src]="profile?.imageUrl"
+    class="w-15rem h-10rem border-2 border-round-2xl"
+  />
+  <h1 class="text-4xl white-space-normal text-center font-semibold">
+    {{ profile?.specialty }}
+  </h1>
+  <p class="white-space-normal text-center opacity-80">
+    {{ profile?.experience }}
+  </p>
+  <p class="white-space-normal text-center opacity-80">
+    {{ profile?.specialty }}
+  </p>
+  <p class="white-space-normal text-center opacity-60">
+    {{ profile?.categories || [] | categoriesToString }}
+  </p>
+</mat-toolbar>
+
+} @else {
+<div class="update-profile-container">
+  <h2 class="login__title">Complete su perfil</h2>
+  <form
+    [formGroup]="formProfile"
+    (ngSubmit)="onSubmit()"
+    class="update-profile__form"
+    enctype="multipart/form-data"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Especialidad</mat-label>
+      <input matInput formControlName="Specialty" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Experiencia</mat-label>
+      <input matInput formControlName="Experience" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Sobre mi</mat-label>
+      <input matInput formControlName="Description" />
+    </mat-form-field>
+
+    <div class="my-2">
+      <mat-label>Foto</mat-label><br />
+      <input type="file" id="image" (change)="onFileChange($event)" accept=".jpg, .jpeg, .png, .gif"/>
+      <img
+        *ngIf="imagePreview"
+        [src]="imagePreview"
+        alt="Image preview"
+        style="max-width: 100px; max-height: 100px"
+      />
+      <div class="info-text">Acepta formatos: jpg, jpeg, png, gif</div>
+      <mat-error *ngIf="formProfile.get('Image')?.hasError('required')">
+        La imagen es requerida
+      </mat-error>
+      <mat-error *ngIf="formProfile.get('Image')?.hasError('invalidType')">
+        Solo se permiten imágenes (jpg, jpeg, png, gif)
+      </mat-error>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Categorías</mat-label>
+      <mat-select formControlName="CategoryIds" multiple>
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formProfile.get('CategoryIds')?.hasError('required')">
+        La categoría es requerida
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+      [disabled]="formProfile.invalid"
+    >
+      Guardar
+    </button>
+  </form>
+</div>
+}

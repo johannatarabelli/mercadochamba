@@ -1,0 +1,95 @@
+<div>
+  <div class="update-profile-container">
+    <h2 class="login__title">Ingrese sus trabajos</h2>
+    <form
+      [formGroup]="formJob"
+      (ngSubmit)="onSubmit()"
+      class="update-profile__form"
+      enctype="multipart/form-data"
+    >
+      <mat-form-field appearance="fill">
+        <mat-label>Titulo</mat-label>
+        <input matInput formControlName="Title" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <input matInput formControlName="Description" />
+      </mat-form-field>
+
+      <div class="my-2">
+        <mat-label>Foto</mat-label><br />
+        <input
+          type="file"
+          id="image"
+          (change)="onFileChange($event)"
+          #fileInput
+          accept=".jpg, .jpeg, .png, .gif"
+        />
+        <img
+          *ngIf="imagePreview"
+          [src]="imagePreview"
+          alt="Image preview"
+          style="max-width: 100px; max-height: 100px"
+        />
+        <div
+          *ngIf="formJob.get('image')?.hasError('invalidType')"
+          class="mat-error"
+        >
+          Solo se permiten imágenes (jpg, jpeg, png, gif)
+        </div>
+        <mat-error *ngIf="formJob.get('image')?.hasError('required')">
+          La imagen es requerida
+        </mat-error>
+        <div class="info-text">Acepta formatos: jpg, jpeg, png, gif</div>
+      </div>
+
+      <button
+        type="submit"
+        mat-raised-button
+        color="primary"
+        [disabled]="formJob.invalid"
+      >
+        Guardar
+      </button>
+    </form>
+  </div>
+
+  <div class="p-4">
+    <h3 class="font-semibold text-2xl">Trabajos</h3>
+    <mat-table [dataSource]="jobs" class="mat-elevation-z8">
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef>Titulo</mat-header-cell>
+        <mat-cell *matCellDef="let job">{{ job.title }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef>Descripción</mat-header-cell>
+        <mat-cell *matCellDef="let job">{{ job.description }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="image">
+        <mat-header-cell *matHeaderCellDef>Foto</mat-header-cell>
+        <mat-cell *matCellDef="let job">
+          <img
+            [src]="job.imageUrl"
+            alt="Image"
+            style="max-width: 100px; max-height: 100px"
+          />
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let job">
+          <button mat-button (click)="onDeleteJob(job)" color="warn">
+            Eliminar
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+  </div>
+</div>

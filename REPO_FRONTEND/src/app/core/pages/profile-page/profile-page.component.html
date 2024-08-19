@@ -1,0 +1,125 @@
+<shared-header />
+
+<mat-toolbar
+  class="flex flex-column p-6 h-fit sm:h-fit px-2 sm:px-4 md:px-8 justify-content-center align-items-center flex-nowrap row-gap-2 sm:row-gap-3"
+  color="primary"
+>
+  <img
+    [src]="card?.imageUrl"
+    [alt]="card?.specialty"
+    class="w-15rem h-10rem border-2 border-round-2xl"
+  />
+  <h1 class="text-4xl white-space-normal text-center font-semibold">
+    {{ card?.userName | titlecase }}
+  </h1>
+  <h2 class="text-3xl white-space-normal text-center font-semibold">
+    {{ card?.specialty }}
+  </h2>
+  <p class="white-space-normal text-center opacity-80">
+    {{ card?.categories || [] | categoriesToString }}
+  </p>
+  <div class="flex flex-column sm:flex-row align-items-center gap-2">
+    <div class="flex align-items-center">
+      <mat-icon color="accent">reviews</mat-icon>
+      <span class="ml-2 text-lg"> Reseñas ({{ reviews }}) </span>
+    </div>
+    <div class="flex align-items-center">
+      <mat-icon color="accent">thumb_up</mat-icon>
+      <span class="ml-2 text-lg">
+        <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]" color="accent">
+          {{ i <= stars! ? "star" : "star_half" }}
+        </mat-icon>
+      </span>
+    </div>
+  </div>
+  <a
+    mat-raised-button
+    color="accent"
+    class="border-round-2xl py-2 px-8"
+    [href]="
+      'https://wa.me/' +
+      card?.phoneNumber +
+      '?text=Hola%20' +
+      card?.userName +
+      '%20te%20contacto%20utilizando%20Mercado%20Chamba%20para%20consultar%20sobre%20tus%20servicios.'
+    "
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Contactar
+  </a>
+</mat-toolbar>
+<h2 class="text-center text-2xl font-medium mt-2" style="color: #15363a">
+  Proyectos
+</h2>
+<div class="mx-2 sm:mx-4 md:mx-8 grid justify-content-center gap-4 my-4 mb-4">
+  @if(jobs.length > 0){
+  <div class="mb-4" *ngFor="let job of jobs">
+    <div class="card col-1 md:col-4 sm:col-6">
+      <div class="flex relative justify-content-center">
+        <img [src]="job.imageUrl" [alt]="job.description" />
+        <button
+          mat-raised-button
+          color="primary"
+          class="absolute bottom-0 right-0 text-center"
+          (click)="openDialog(job)"
+        >
+          <mat-icon>build</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+  } @else {
+  <div class="flex align-content-center">
+    <mat-icon color="warn">warning</mat-icon>
+    <span class="ml-2 text-lg"> No se encontraron proyectos </span>
+  </div>
+  }
+</div>
+
+<h2 class="text-center text-2xl font-medium mt-2" style="color: #15363a">
+  Reseñas
+</h2>
+<div class="mx-2 sm:mx-4 md:mx-8 grid justify-content-center gap-4 my-4 mb-4">
+  @if(reviewsFake.length > 0){
+  <div class="mb-4" *ngFor="let review of reviewsFake; let i = index;">
+    <mat-card class="card col-1 md:col-4 sm:col-6">
+      <div class="flex">
+        <img
+          class="w-4rem h-4rem"
+          [src]="'https://randomuser.me/api/portraits/men/'+i+'.jpg'"
+          alt="foto"
+        />
+        <div class="flex flex-column align-content-center gap-2">
+          <span class="ml-3 text-xl font-semibold" style="color: #15363a">
+            {{ review.name }}
+          </span>
+          <span class="ml-3 text-lg font-medium" style="color: #db5e41">
+            {{ review.date }}
+          </span>
+        </div>
+      </div>
+
+      <div class="flex align-content-center my-2">
+        <span class="text-lg">
+          <mat-icon *ngFor="let i of [1, 2, 3, 4, 5]" color="accent">
+            {{ i <= review.stars ? "star" : "star_half" }}
+          </mat-icon>
+        </span>
+      </div>
+
+      <div class="flex align-content-center">
+        <span class="ml-2 text-lg">{{ review.message }}</span>
+      </div>
+    </mat-card>
+  </div>
+
+  } @else {
+  <div class="flex align-content-center">
+    <mat-icon color="warn">warning</mat-icon>
+    <span class="ml-2 text-lg"> No se encontraron reseñas </span>
+  </div>
+  }
+</div>
+
+<app-footer />

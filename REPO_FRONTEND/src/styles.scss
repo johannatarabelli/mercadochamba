@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+$surface: #ffffff;
+$primary: #15363a;
+$secondary: #db5e41;
+$tertiary: #2d394b;
+$error: #b00020;
+$accent: #db5e41;
+$black-87-opacity: rgba(0, 0, 0, 0.87);
+$white: #ffffff;
+
+.success-snackbar {
+  background-color: $white !important;
+  color: $accent !important;
+}
+
+.error-snackbar {
+  background-color: $white !important;
+  color: $error !important;
+}
+
+.info-snackbar {
+  background-color: $white !important;
+  color: $primary !important;
+}
+
+.warning-snackbar {
+  background-color: $white !important;
+  color: $tertiary !important;
+}

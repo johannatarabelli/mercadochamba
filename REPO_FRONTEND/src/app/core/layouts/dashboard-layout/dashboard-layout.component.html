@@ -1,0 +1,83 @@
+<mat-drawer-container class="flex" autosize>
+  <!--  TODO: SIDEBAR -->
+  <mat-drawer
+    #drawer
+    class="flex h-screen fixed w-screen sm:w-3"
+    mode="side"
+    style="background-color: #15363a; color: white; padding: 0.2rem;"
+  >
+   <div class="flex justify-content-start align-items-center mt-1">
+    <button (click)="toggleDrawer(drawer)" mat-icon-button class="text-left">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span
+        ><img
+          src="assets/logo2.svg"
+          class="w-full sm:w-full hover:shadow-6"
+          alt="Logo Mercado Chamba"
+          (click)="goToIndex()"
+      /></span>
+   </div>
+
+    <mat-list>
+      <mat-list-item>
+        <a routerLink="/dashboard" mat-raised-button color="primary" class="w-full opacity-50" routerLinkActive="opacity-100" [routerLinkActiveOptions]="{ exact: true }">
+          Dashboard
+        </a>
+      </mat-list-item>
+      @if(user?.role === "Cliente") {
+        <mat-list-item>
+          <a routerLink="/dashboard/jobs" mat-raised-button color="primary" class="w-full opacity-50" routerLinkActive="opacity-100" [routerLinkActiveOptions]="{ exact: true }">
+            Trabajos
+          </a>
+        </mat-list-item>
+      }
+      @if(user?.role === "Admin") {
+        <mat-list-item>
+          <a routerLink="/dashboard/admins" mat-raised-button color="primary" class="w-full opacity-50" routerLinkActive="opacity-100" [routerLinkActiveOptions]="{ exact: true }">
+            Administradores
+          </a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/dashboard/countries" mat-raised-button color="primary" class="w-full opacity-50" routerLinkActive="opacity-100" [routerLinkActiveOptions]="{ exact: true }">
+            Países
+          </a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/dashboard/provinces" mat-raised-button color="primary" class="w-full opacity-50" routerLinkActive="opacity-100" [routerLinkActiveOptions]="{ exact: true }">
+            Provincias
+          </a>
+        </mat-list-item>
+        <mat-list-item>
+          <a routerLink="/dashboard/neighborhoods" mat-raised-button color="primary" class="w-full opacity-50" routerLinkActive="opacity-100" [routerLinkActiveOptions]="{ exact: true }">
+            Barrios
+          </a>
+        </mat-list-item>
+      }
+      <mat-divider class="my-2"></mat-divider>
+      <mat-list-item>
+        <button (click)="handleLogout()" mat-button color="warn" class="w-fit">
+          Cerrar sesión
+        </button>
+      </mat-list-item>
+    </mat-list>
+  </mat-drawer>
+
+  <div class="fixed w-screen w-full">
+    <div [ngClass]="showFiller ? 'w-9' : 'w-12'"  class="h-screen overflow-auto">
+      <mat-toolbar>
+        <button mat-button (click)="toggleDrawer(drawer)">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="flex-1"></span>
+        <span aria-label="Role" class="text-sm" style="color: gray;">
+          {{ user?.role | titlecase}}
+        </span>
+        <button mat-button aria-label="Username" class="ml-2">
+          {{ user?.userName | titlecase }}
+        </button>
+      </mat-toolbar>
+      <router-outlet />
+    </div>
+  </div>
+</mat-drawer-container>

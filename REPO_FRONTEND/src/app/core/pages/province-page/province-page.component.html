@@ -1,0 +1,71 @@
+<div>
+  <form
+    [formGroup]="formProvince"
+    (ngSubmit)="submit()"
+    class="register__form grid gap-2 justify-content-center m-2"
+    autocomplete="off"
+  >
+    <mat-form-field class="register__input-container">
+      <mat-label for="name">Nombre</mat-label>
+      <input type="text" id="name" formControlName="name" matInput />
+      <mat-error *ngIf="formProvince.controls['name'].errors?.['required']"
+        >Nombre es requerido.</mat-error
+      >
+      <mat-error *ngIf="formProvince.controls['name'].errors?.['minlength']"
+        >Nombre debe tener al menos 1 caracter.</mat-error
+      >
+      <mat-error *ngIf="formProvince.controls['name'].errors?.['maxlength']"
+        >Nombre no puede exceder 50 caracteres.</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field class="register__input-container">
+      <mat-label for="countryId">País</mat-label>
+      <mat-select id="countryId" formControlName="countryId">
+        <mat-option *ngFor="let country of countries" [value]="country.id">
+          {{ country.name }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formProvince.controls['countryId'].errors?.['required']"
+        >País es requerido.</mat-error
+      >
+    </mat-form-field>
+
+    <button
+      mat-flat-button
+      color="primary"
+      type="submit"
+      class="login__submit col-6"
+      [disabled]="formProvince.invalid"
+    >
+      Agregar
+    </button>
+  </form>
+
+  <div class="p-4">
+    <h3 class="font-semibold text-2xl">Provincias</h3>
+    <table mat-table [dataSource]="provinces" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let province">{{ province.name }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="neighborhoods">
+        <mat-header-cell *matHeaderCellDef>Barrios</mat-header-cell>
+        <mat-cell *matCellDef="let province">{{ province.neighborhoods | neighborhoodsToString }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let province">
+          <button mat-button color="warn" (click)="delete(province.id)">
+            Eliminar
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="['name', 'neighborhoods', 'actions']"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: ['name', 'neighborhoods', 'actions']"></mat-row>
+    </table>
+  </div>
+</div>

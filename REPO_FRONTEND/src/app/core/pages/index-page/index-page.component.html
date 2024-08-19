@@ -1,0 +1,4 @@
+<shared-header></shared-header>
+<app-filters [categories]="categories" [idSelectedCategory]="idSelectedCategory" (selectCategory)="onSelectCategory($event)" (search)="onSearchText($event)" />
+<app-card-list [professionals]="cards" />
+<app-footer></app-footer>

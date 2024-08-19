@@ -1,0 +1,174 @@
+<div class="p-4">
+  <div class="update-profile-container p-2">
+    <h2 class="login__title">Ingrese nuevos administradores</h2>
+    <form
+      [formGroup]="formAdmin"
+      (ngSubmit)="submit()"
+      class="register__form grid gap-2 row-gap-4 justify-content-center m-2"
+      autocomplete="off"
+    >
+      <mat-form-field class="register__input-container">
+        <mat-label for="userName">Nombre de Usuario</mat-label>
+        <input type="text" id="userName" formControlName="userName" matInput />
+        <mat-error
+          *ngIf="formAdmin.controls['userName'].errors?.['required']"
+          >Nombre de Usuario es requerido.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['userName'].errors?.['minlength']"
+          >Nombre de Usuario debe tener al menos 3 caracteres.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['userName'].errors?.['maxlength']"
+          >Nombre de Usuario no puede exceder 50 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="register__input-container">
+        <mat-label for="firstName">Nombre</mat-label>
+        <input type="text" formControlName="firstName" matInput />
+        <mat-error
+          *ngIf="formAdmin.controls['firstName'].errors?.['required']"
+          >Nombre es requerido.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['firstName'].errors?.['minlength']"
+          >Nombre debe tener al menos 1 caracter.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['firstName'].errors?.['maxlength']"
+          >Nombre no puede exceder 50 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="register__input-container">
+        <mat-label for="lastName">Apellido</mat-label>
+        <input type="text" formControlName="lastName" matInput />
+        <mat-error
+          *ngIf="formAdmin.controls['lastName'].errors?.['required']"
+          >Apellido es requerido.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['lastName'].errors?.['minlength']"
+          >Apellido debe tener al menos 1 caracter.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['lastName'].errors?.['maxlength']"
+          >Apellido no puede exceder 50 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="register__input-container">
+        <mat-label for="email">Correo Electrónico</mat-label>
+        <input type="email" formControlName="email" matInput />
+        <mat-error *ngIf="formAdmin.controls['email'].errors?.['required']"
+          >Correo Electrónico es requerido.</mat-error
+        >
+        <mat-error *ngIf="formAdmin.controls['email'].errors?.['email']"
+          >Correo Electrónico no es válido.</mat-error
+        >
+        <mat-error *ngIf="formAdmin.controls['email'].errors?.['maxlength']"
+          >Correo Electrónico no puede exceder 100 caracteres.</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field class="register__input-container col-12 sm:col-4">
+        <mat-label for="password">Contraseña</mat-label>
+        <div class="flex">
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          <button
+            type="button"
+            mat-icon-button
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+        </div>
+        <mat-error
+          *ngIf="formAdmin.controls['password'].errors?.['required']"
+          >Contraseña es requerida.</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['password'].errors?.['noUpperCase']"
+          >{{ formAdmin.controls["password"].errors?.['noUpperCase'] }}</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['password'].errors?.['noSpecialCharacter']"
+          >{{
+          formAdmin.controls["password"].errors?.['noSpecialCharacter']
+          }}</mat-error
+        >
+        <mat-error
+          *ngIf="formAdmin.controls['password'].errors?.['minLength8']"
+          >{{
+        formAdmin.controls["password"].errors?.['minLength8']
+          }}</mat-error
+        >
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="primary"
+        type="submit"
+        class="login__submit col-12 sm:col-4"
+        [disabled]="formAdmin.invalid"
+      >
+        Agregar
+      </button>
+    </form>
+
+    @if(errors.length> 0){
+    <mat-list>
+      <mat-list-item
+        class="text-left"
+        *ngFor="let error of errors; let i = index"
+        color="primary"
+      >
+        <mat-error color="primary">{{ error }}</mat-error>
+      </mat-list-item>
+    </mat-list>
+    }
+  </div>
+
+  <div class="w-full overflow-auto">
+    <h3 class="font-semibold text-2xl mb-4">Detalles del Usuario</h3>
+    <table mat-table [dataSource]="admins" class="mat-elevation-z8">
+      <ng-container matColumnDef="userName">
+        <mat-header-cell *matHeaderCellDef class="bg-gray-100 font-medium">Nombre de Usuario</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.userName }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="firstName">
+        <mat-header-cell *matHeaderCellDef class="bg-gray-100 font-medium">Nombre</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.firstName }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="lastName">
+        <mat-header-cell *matHeaderCellDef class="bg-gray-100 font-medium">Apellido</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.lastName }}</mat-cell>
+      </ng-container>
+  
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef class="bg-gray-100 font-medium">Correo Electrónico</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{ element.email }}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-button (click)="onDelete(element.id)" color="warn">Eliminar</button>
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </table>
+  </div>
+</div>

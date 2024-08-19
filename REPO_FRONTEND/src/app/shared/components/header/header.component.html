@@ -1,0 +1,49 @@
+<header>
+  <mat-toolbar
+    class="flex h-6rem sm:h-8rem px-2 sm:px-4 md:px-8 justify-content-center align-items-center wrap"
+    style="background-color: white"
+  >
+    <span
+      ><img
+        src="assets/logo.svg"
+        class="w-10rem sm:w-16rem"
+        alt="Logo Mercado Chamba"
+        (click)="goToIndex()"
+    /></span>
+    <span class="flex-1"></span>
+
+    @if(!!user){
+    <a
+      mat-flat-button
+      class="border-round-2xl"
+      color="primary"
+      aria-label="Example icon-button with heart icon"
+      (click)="navigateTo('dashboard')"
+    >
+      <div
+        class="flex mx-3 sm:mx-4 justify-content-center align-items-center gap-1"
+      >
+      <i class="fa-solid fa-gauge-simple-high"></i>
+        <span class="font-bold">Dashboard</span>
+      </div>
+    </a>
+    } @else {
+    <a
+      mat-flat-button
+      class="border-round-2xl"
+      color="primary"
+      aria-label="Example icon-button with heart icon"
+      (click)="isAuthRoute ? navigateTo('/') : navigateTo('auth')"
+    >
+      <div
+        class="flex mx-3 sm:mx-4 justify-content-center align-items-center gap-1"
+      >
+        @if(isAuthRoute) { <i class="fa-solid fa-house"></i> } @else {
+        <i class="fa-regular fa-circle-user"></i>}
+
+        <span class="font-bold">{{ isAuthRoute ? "Home" : "Login" }}</span>
+      </div>
+    </a>
+    }
+  </mat-toolbar>
+</header>

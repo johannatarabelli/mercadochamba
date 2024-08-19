@@ -1,0 +1,19 @@
+.card {
+  width: 274px;
+  border-radius: 15px;
+  border: 1px solid black;
+  display: grid;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  &:hover {
+    border: 1px solid #db5e41;
+  }
+
+  img {
+    width: 234px;
+    height: 146px;
+    border-radius: 10px;
+  }
+}
