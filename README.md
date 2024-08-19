@@ -43,7 +43,7 @@ Entre las funcionalidades principales de la aplicación encontramos, un motor de
 
 ## 🔗 Enlaces Importantes
 
-- [Documentación del Proyecto](ruta/a/documentacion.pdf)
+- [Documentación del Proyecto](https://github.com/johannatarabelli/mercadochamba/tree/main/DOCUMENTACION)
 - [Guía de Estilo del Proyecto](https://www.figma.com/design/6zpFTDPZMJIABz5thVWbsm/MERCADO-CHAMBA?node-id=0-1&t=B9m0kH87pK3vAA2h-0)
 - [Organización del Proyecto](https://trello.com/b/JJlgL08E/backlog-c19-12-m-csharp-angular)
 - [GitHub del Proyecto](https://github.com/No-Country-simulation/c19-12-m-csharp-angular)
