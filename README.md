@@ -30,9 +30,6 @@ Entre las funcionalidades principales de la aplicación encontramos, un motor de
 | <img width="48" height="48" src="https://avatars.githubusercontent.com/u/141964978?v=4" alt="johannatarabelli avatar" /> | Johanna Tarabelli | QA                     | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/johannatarabelli) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/johanna-tarabelli-a2501041/)   |
 | <img width="48" height="48" src="https://avatars.githubusercontent.com/u/63021907?v=4" alt="jfpanchi avatar" /> | Jefferson Panchi  | Frontend Developer     | [![Github](https://skillicons.dev/icons?i=github)](https://github.com/jfpanchi) [![Linkedin](https://skillicons.dev/icons?i=linkedin)](https://www.linkedin.com/in/jefferson-panchi-chacon)               |
 
-
-
-
 ## 🛠️ Tecnologías Utilizadas
 
 - Frontend: `Angular`
