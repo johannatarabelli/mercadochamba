@@ -13,7 +13,7 @@ El objetivo de este proyecto es generar un espacio que haga de nexo entre ambos 
 Entre las funcionalidades principales de la aplicación encontramos, un motor de buscada robusto, que permite encontrar lo que buscas en pocos segundos. A su vez cuenta con un filtro por zona, lo que permite buscar profesionales allegados al domicilio, un filtro por valoración, permitiendo que se elija a los profesionales mejor calificados y un filtro por categoría de servicio prestado. 
 
 ## 🖼️ Imágenes del Proyecto
-
+Página principal
 <br>
 <img width="400" height= "200" src="https://github.com/No-Country-simulation/c19-12-m-csharp-angular/blob/main/ASSETS/imagenWebApp.png" alt="vista principal Mercado Chamba" />
 <br>
